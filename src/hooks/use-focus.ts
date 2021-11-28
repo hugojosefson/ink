@@ -1,6 +1,6 @@
-import { useContext, useEffect, useMemo } from "react";
-import FocusContext from "../components/FocusContext";
-import useStdin from "./use-stdin";
+import { useContext, useEffect, useMemo } from "../../deps.ts";
+import FocusContext from "../components/FocusContext.ts";
+import useStdin from "./use-stdin.ts";
 
 interface Input {
   /**

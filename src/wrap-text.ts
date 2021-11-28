@@ -1,6 +1,6 @@
-import wrapAnsi from "wrap-ansi";
-import cliTruncate from "cli-truncate";
-import { Styles } from "./styles";
+import { wrapAnsi } from "../deps.ts";
+import { cliTruncate } from "../deps.ts";
+import { Styles } from "./styles.ts";
 
 const cache: Record<string, string> = {};
 

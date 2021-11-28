@@ -1,4 +1,4 @@
-import { DOMElement } from "./dom";
+import { DOMElement } from "./dom.ts";
 
 interface Output {
   /**

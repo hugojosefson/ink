@@ -1,4 +1,4 @@
-import Yoga from "yoga-layout-prebuilt";
+import { Yoga } from "../deps.ts";
 
 export default (yogaNode: Yoga.YogaNode) => {
   return (

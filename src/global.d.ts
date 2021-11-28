@@ -1,7 +1,7 @@
-import { Key, LegacyRef, ReactNode } from "react";
-import { Except } from "type-fest";
-import { DOMElement } from "./dom";
-import { Styles } from "./styles";
+import { Key, LegacyRef, ReactNode } from "../deps.ts";
+import { Except } from "../deps.ts";
+import { DOMElement } from "./dom.ts";
+import { Styles } from "./styles.ts";
 
 declare global {
   namespace JSX {

@@ -1,4 +1,5 @@
-import { createContext } from "react";
+import { createContext } from "../../deps.ts";
+import { NodeJS } from "../../deps.ts";
 
 export interface Props {
   /**

@@ -1,7 +1,8 @@
-import { ReactElement } from "react";
-import Ink, { Options as InkOptions } from "./ink";
-import instances from "./instances";
-import { Stream } from "stream";
+import { ReactElement } from "../deps.ts";
+import Ink, { Options as InkOptions } from "./ink.tsx";
+import instances from "./instances.ts";
+import { Stream } from "../deps.ts";
+import { NodeJS } from "../deps.ts";
 
 export interface RenderOptions {
   /**

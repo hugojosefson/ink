@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import { chalk } from "../deps.ts";
 
 type ColorType = "foreground" | "background";
 

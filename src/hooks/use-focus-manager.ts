@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import FocusContext, { Props } from "../components/FocusContext";
+import { useContext } from "../../deps.ts";
+import FocusContext, { Props } from "../components/FocusContext.ts";
 
 interface Output {
   /**

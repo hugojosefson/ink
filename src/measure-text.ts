@@ -1,4 +1,4 @@
-import widestLine from "widest-line";
+import { widestLine } from "../deps.ts";
 
 const cache: Record<string, Output> = {};
 

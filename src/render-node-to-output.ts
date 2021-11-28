@@ -1,12 +1,12 @@
-import Yoga from "yoga-layout-prebuilt";
-import widestLine from "widest-line";
-import indentString from "indent-string";
-import wrapText from "./wrap-text";
-import getMaxWidth from "./get-max-width";
-import squashTextNodes from "./squash-text-nodes";
-import renderBorder from "./render-border";
-import { DOMElement } from "./dom";
-import Output from "./output";
+import { Yoga } from "../deps.ts";
+import { widestLine } from "../deps.ts";
+import { indentString } from "../deps.ts";
+import wrapText from "./wrap-text.ts";
+import getMaxWidth from "./get-max-width.ts";
+import squashTextNodes from "./squash-text-nodes.ts";
+import renderBorder from "./render-border.ts";
+import { DOMElement } from "./dom.ts";
+import Output from "./output.ts";
 
 // If parent container is `<Box>`, text nodes will be treated as separate nodes in
 // the tree and will have their own coordinates in the layout.

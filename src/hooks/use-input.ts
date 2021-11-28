@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import useStdin from "./use-stdin";
+import { useEffect } from "../../deps.ts";
+import useStdin from "./use-stdin.ts";
 
 /**
  * Handy information about a key that was pressed.

@@ -1,8 +1,8 @@
-import React, { FC, ReactNode } from "react";
-import chalk, { ForegroundColor } from "chalk";
-import colorize from "../colorize";
-import { Styles } from "../styles";
-import { LiteralUnion } from "type-fest";
+import { FC, React, ReactNode } from "../../deps.ts";
+import { chalk, ForegroundColor } from "../../deps.ts";
+import colorize from "../colorize.ts";
+import { Styles } from "../styles.ts";
+import { LiteralUnion } from "../../deps.ts";
 
 export interface Props {
   /**

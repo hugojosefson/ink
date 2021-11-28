@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import { FC, React, ReactNode } from "../../deps.ts";
 
 export interface Props {
   /**

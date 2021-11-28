@@ -1,5 +1,11 @@
-import React, { ReactNode, useLayoutEffect, useMemo, useState } from "react";
-import { Styles } from "../styles";
+import {
+  React,
+  ReactNode,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "../../deps.ts";
+import { Styles } from "../styles.ts";
 
 export interface Props<T> {
   /**

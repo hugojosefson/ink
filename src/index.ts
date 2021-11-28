@@ -1,26 +1,28 @@
-export { default as render, Instance, RenderOptions } from "./render";
-export { default as Box, Props as BoxProps } from "./components/Box";
-export { default as Text, Props as TextProps } from "./components/Text";
-export { Props as AppProps } from "./components/AppContext";
-export { Props as StdinProps } from "./components/StdinContext";
-export { Props as StdoutProps } from "./components/StdoutContext";
-export { Props as StderrProps } from "./components/StderrContext";
-export { default as Static, Props as StaticProps } from "./components/Static";
-export {
-  default as Transform,
-  Props as TransformProps,
-} from "./components/Transform";
-export {
-  default as Newline,
-  Props as NewlineProps,
-} from "./components/Newline";
-export { default as Spacer } from "./components/Spacer";
-export { default as useInput, Key } from "./hooks/use-input";
-export { default as useApp } from "./hooks/use-app";
-export { default as useStdin } from "./hooks/use-stdin";
-export { default as useStdout } from "./hooks/use-stdout";
-export { default as useStderr } from "./hooks/use-stderr";
-export { default as useFocus } from "./hooks/use-focus";
-export { default as useFocusManager } from "./hooks/use-focus-manager";
-export { default as measureElement } from "./measure-element";
-export { DOMElement } from "./dom";
+export { default as render } from "./render.ts";
+export type { RenderOptions } from "./render.ts";
+export type { Instance } from "./render.ts";
+export { default as Box } from "./components/Box.tsx";
+export { default as Text } from "./components/Text.tsx";
+export type { Props as BoxProps } from "./components/Box.tsx";
+export type { Props as TextProps } from "./components/Text.tsx";
+export type { Props as AppProps } from "./components/AppContext.ts";
+export type { Props as StdinProps } from "./components/StdinContext.ts";
+export type { Props as StdoutProps } from "./components/StdoutContext.ts";
+export type { Props as StderrProps } from "./components/StderrContext.ts";
+export { default as Static } from "./components/Static.tsx";
+export { default as Transform } from "./components/Transform.tsx";
+export { default as Newline } from "./components/Newline.tsx";
+export type { Props as StaticProps } from "./components/Static.tsx";
+export type { Props as TransformProps } from "./components/Transform.tsx";
+export type { Props as NewlineProps } from "./components/Newline.tsx";
+export { default as Spacer } from "./components/Spacer.tsx";
+export { default as useInput } from "./hooks/use-input.ts";
+export type { Key } from "./hooks/use-input.ts";
+export { default as useApp } from "./hooks/use-app.ts";
+export { default as useStdin } from "./hooks/use-stdin.ts";
+export { default as useStdout } from "./hooks/use-stdout.ts";
+export { default as useStderr } from "./hooks/use-stderr.ts";
+export { default as useFocus } from "./hooks/use-focus.ts";
+export { default as useFocusManager } from "./hooks/use-focus-manager.ts";
+export { default as measureElement } from "./measure-element.ts";
+export type { DOMElement } from "./dom.ts";

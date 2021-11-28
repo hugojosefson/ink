@@ -1,6 +1,6 @@
-import sliceAnsi from "slice-ansi";
-import stringWidth from "string-width";
-import { OutputTransformer } from "./render-node-to-output";
+import { sliceAnsi } from "../deps.ts";
+import { stringWidth } from "../deps.ts";
+import { OutputTransformer } from "./render-node-to-output.ts";
 
 /**
  * "Virtual" output class

@@ -1,12 +1,13 @@
-import * as fs from "fs";
-import React, { FC } from "react";
-import StackUtils from "stack-utils";
-import codeExcerpt, { ExcerptLine } from "code-excerpt";
-import Box from "./Box";
-import Text from "./Text";
+import { FC, React } from "../../deps.ts";
+import { existsSync, readFileSync } from "../../deps.ts";
+import { StackUtils } from "../../deps.ts";
+import { codeExcerpt, ExcerptLine } from "../../deps.ts";
+import { cwd } from "../../deps.ts";
+import Box from "./Box.tsx";
+import Text from "./Text.tsx";
 
 const stackUtils = new StackUtils({
-  cwd: process.cwd(),
+  cwd: cwd(),
   internals: StackUtils.nodeInternals(),
 });
 
@@ -20,8 +21,8 @@ const ErrorOverview: FC<Props> = ({ error }) => {
   let excerpt: ExcerptLine[] | undefined;
   let lineWidth = 0;
 
-  if (origin?.file && origin?.line && fs.existsSync(origin.file)) {
-    const sourceCode = fs.readFileSync(origin.file, "utf8");
+  if (origin?.file && origin?.line && existsSync(origin.file)) {
+    const sourceCode = readFileSync(origin.file, "utf8");
     excerpt = codeExcerpt(sourceCode, origin.line);
 
     if (excerpt) {

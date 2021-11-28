@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import StdinContext from "../components/StdinContext";
+import { useContext } from "../../deps.ts";
+import StdinContext from "../components/StdinContext.ts";
 
 /**
  * `useStdin` is a React hook, which exposes stdin stream.

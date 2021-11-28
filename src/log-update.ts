@@ -1,6 +1,6 @@
-import { Writable } from "stream";
-import ansiEscapes from "ansi-escapes";
-import cliCursor from "cli-cursor";
+import { Writable } from "../deps.ts";
+import { ansiEscapes } from "../deps.ts";
+import { cliCursor } from "../deps.ts";
 
 export interface LogUpdate {
   clear: () => void;

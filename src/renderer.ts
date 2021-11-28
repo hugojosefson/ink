@@ -1,7 +1,7 @@
-import Yoga from "yoga-layout-prebuilt";
-import renderNodeToOutput from "./render-node-to-output";
-import Output from "./output";
-import { DOMElement } from "./dom";
+import { Yoga } from "../deps.ts";
+import renderNodeToOutput from "./render-node-to-output.ts";
+import Output from "./output.ts";
+import { DOMElement } from "./dom.ts";
 
 interface Result {
   output: string;

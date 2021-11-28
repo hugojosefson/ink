@@ -1,9 +1,9 @@
 import {
   unstable_cancelCallback as cancelPassiveEffects,
   unstable_scheduleCallback as schedulePassiveEffects,
-} from "scheduler";
-import createReconciler from "react-reconciler";
-import Yoga from "yoga-layout-prebuilt";
+} from "../deps.ts";
+import { createReconciler } from "../deps.ts";
+import { Yoga } from "../deps.ts";
 import {
   appendChildNode,
   createNode,
@@ -17,9 +17,9 @@ import {
   setStyle,
   setTextNodeValue,
   TextNode,
-} from "./dom";
-import { Styles } from "./styles";
-import { OutputTransformer } from "./render-node-to-output";
+} from "./dom.ts";
+import { Styles } from "./styles.ts";
+import { OutputTransformer } from "./render-node-to-output.ts";
 
 // We need to conditionally perform devtools connection to avoid
 // accidentally breaking other third-party code.

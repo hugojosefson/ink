@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import React, { PureComponent, ReactNode } from "react";
-import cliCursor from "cli-cursor";
-import AppContext from "./AppContext";
-import StdinContext from "./StdinContext";
-import StdoutContext from "./StdoutContext";
-import StderrContext from "./StderrContext";
-import FocusContext from "./FocusContext";
-import ErrorOverview from "./ErrorOverview";
+import { PureComponent, React, ReactNode } from "../../deps.ts";
+import { cliCursor } from "../../deps.ts";
+import AppContext from "./AppContext.ts";
+import StdinContext from "./StdinContext.ts";
+import StdoutContext from "./StdoutContext.ts";
+import StderrContext from "./StderrContext.ts";
+import FocusContext from "./FocusContext.ts";
+import ErrorOverview from "./ErrorOverview.tsx";
+import { NodeJS } from "../../deps.ts";
 
 const TAB = "\t";
 const SHIFT_TAB = "\u001B[Z";

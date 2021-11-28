@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import Yoga, { YogaNode } from "yoga-layout-prebuilt";
-import { Boxes } from "cli-boxes";
-import { LiteralUnion } from "type-fest";
-import { ForegroundColor } from "chalk";
+import { Yoga, YogaNode } from "../deps.ts";
+import { Boxes } from "../deps.ts";
+import { LiteralUnion } from "../deps.ts";
+import { ForegroundColor } from "../deps.ts";
 
 export interface Styles {
   readonly textWrap?:
