@@ -11,7 +11,7 @@ Deno.
 
 - [x] Strip `ink` of everything but the code.
 - [x] `deno fmt`
-- [ ] Make the syntax pass `deno cache --unstable`.
+- [ ] Make the syntax pass `./check-syntax`.
 - [ ] If necessary, fork dependencies and make them work with Deno.
 - [ ] If necessary, remove dependencies that are not needed if they cause any
       trouble.

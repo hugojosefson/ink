@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+clear
+
+deno fmt *.ts src
+echo
+echo
+
+exec deno cache --unstable "${@:-"src/index.ts"}"
