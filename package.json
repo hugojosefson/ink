@@ -10,6 +10,7 @@
 		"url": "https://github.com/vadimdemedes"
 	},
 	"main": "build",
+	"type": "module",
 	"types": "build/index.d.ts",
 	"engines": {
 		"node": ">=10"
