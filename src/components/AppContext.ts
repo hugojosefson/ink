@@ -1,19 +1,19 @@
-import {createContext} from 'react';
+import { createContext } from "react";
 
 export interface Props {
-	/**
-	 * Exit (unmount) the whole Ink app.
-	 */
-	readonly exit: (error?: Error) => void;
+  /**
+   * Exit (unmount) the whole Ink app.
+   */
+  readonly exit: (error?: Error) => void;
 }
 
 /**
  * `AppContext` is a React context, which exposes a method to manually exit the app (unmount).
  */
 const AppContext = createContext<Props>({
-	exit: () => {}
+  exit: () => {},
 });
 
-AppContext.displayName = 'InternalAppContext';
+AppContext.displayName = "InternalAppContext";
 
 export default AppContext;

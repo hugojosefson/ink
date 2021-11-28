@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import Box from './Box';
+import React, { FC } from "react";
+import Box from "./Box";
 
 /**
  * A flexible space that expands along the major axis of its containing layout.
@@ -7,6 +7,6 @@ import Box from './Box';
  */
 const Spacer: FC = () => <Box flexGrow={1} />;
 
-Spacer.displayName = 'Spacer';
+Spacer.displayName = "Spacer";
 
 export default Spacer;

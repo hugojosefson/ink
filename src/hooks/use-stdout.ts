@@ -1,5 +1,5 @@
-import {useContext} from 'react';
-import StdoutContext from '../components/StdoutContext';
+import { useContext } from "react";
+import StdoutContext from "../components/StdoutContext";
 
 /**
  * `useStdout` is a React hook, which exposes stdout stream.

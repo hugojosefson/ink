@@ -1,23 +1,23 @@
-import React, {useMemo, useState, useLayoutEffect, ReactNode} from 'react';
-import {Styles} from '../styles';
+import React, { ReactNode, useLayoutEffect, useMemo, useState } from "react";
+import { Styles } from "../styles";
 
 export interface Props<T> {
-	/**
-	 * Array of items of any type to render using a function you pass as a component child.
-	 */
-	readonly items: T[];
+  /**
+   * Array of items of any type to render using a function you pass as a component child.
+   */
+  readonly items: T[];
 
-	/**
-	 * Styles to apply to a container of child elements. See <Box> for supported properties.
-	 */
-	readonly style?: Styles;
+  /**
+   * Styles to apply to a container of child elements. See <Box> for supported properties.
+   */
+  readonly style?: Styles;
 
-	/**
-	 * Function that is called to render every item in `items` array.
-	 * First argument is an item itself and second argument is index of that item in `items` array.
-	 * Note that `key` must be assigned to the root component.
-	 */
-	readonly children: (item: T, index: number) => ReactNode;
+  /**
+   * Function that is called to render every item in `items` array.
+   * First argument is an item itself and second argument is index of that item in `items` array.
+   * Note that `key` must be assigned to the root component.
+   */
+  readonly children: (item: T, index: number) => ReactNode;
 }
 
 /**
@@ -33,41 +33,41 @@ export interface Props<T> {
  * to display a list of generated pages, while still displaying a live progress bar.
  */
 const Static = <T,>(props: Props<T>) => {
-	const {items, children: render, style: customStyle} = props;
-	const [index, setIndex] = useState(0);
+  const { items, children: render, style: customStyle } = props;
+  const [index, setIndex] = useState(0);
 
-	const itemsToRender: T[] = useMemo(() => {
-		return items.slice(index);
-	}, [items, index]);
+  const itemsToRender: T[] = useMemo(() => {
+    return items.slice(index);
+  }, [items, index]);
 
-	useLayoutEffect(() => {
-		setIndex(items.length);
-	}, [items.length]);
+  useLayoutEffect(() => {
+    setIndex(items.length);
+  }, [items.length]);
 
-	const children = itemsToRender.map((item, itemIndex) => {
-		return render(item, index + itemIndex);
-	});
+  const children = itemsToRender.map((item, itemIndex) => {
+    return render(item, index + itemIndex);
+  });
 
-	const style: Styles = useMemo(
-		() => ({
-			position: 'absolute',
-			flexDirection: 'column',
-			...customStyle
-		}),
-		[customStyle]
-	);
+  const style: Styles = useMemo(
+    () => ({
+      position: "absolute",
+      flexDirection: "column",
+      ...customStyle,
+    }),
+    [customStyle],
+  );
 
-	return (
-		<ink-box
-			// @ts-ignore
-			internal_static
-			style={style}
-		>
-			{children}
-		</ink-box>
-	);
+  return (
+    <ink-box
+      // @ts-ignore
+      internal_static
+      style={style}
+    >
+      {children}
+    </ink-box>
+  );
 };
 
-Static.displayName = 'Static';
+Static.displayName = "Static";
 
 export default Static;

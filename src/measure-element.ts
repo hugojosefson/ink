@@ -1,21 +1,21 @@
-import {DOMElement} from './dom';
+import { DOMElement } from "./dom";
 
 interface Output {
-	/**
-	 * Element width.
-	 */
-	width: number;
+  /**
+   * Element width.
+   */
+  width: number;
 
-	/**
-	 * Element height.
-	 */
-	height: number;
+  /**
+   * Element height.
+   */
+  height: number;
 }
 
 /**
  * Measure the dimensions of a particular `<Box>` element.
  */
 export default (node: DOMElement): Output => ({
-	width: node.yogaNode?.getComputedWidth() ?? 0,
-	height: node.yogaNode?.getComputedHeight() ?? 0
+  width: node.yogaNode?.getComputedWidth() ?? 0,
+  height: node.yogaNode?.getComputedHeight() ?? 0,
 });
