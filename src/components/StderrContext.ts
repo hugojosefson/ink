@@ -1,11 +1,11 @@
 import { createContext } from "../../deps.ts";
-import { NodeJS } from "../../deps.ts";
+import { StdErr } from "../stdio.ts";
 
 export interface Props {
   /**
    * Stderr stream passed to `render()` in `options.stderr` or `process.stderr` by default.
    */
-  readonly stderr?: NodeJS.WriteStream;
+  readonly stderr?: StdErr;
 
   /**
    * Write any string to stderr, while preserving Ink's output.

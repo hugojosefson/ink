@@ -1,6 +1,6 @@
-import { Writable } from "../deps.ts";
 import { ansiEscapes } from "../deps.ts";
 import { cliCursor } from "../deps.ts";
+import { Writer } from "./stdio.ts";
 
 export interface LogUpdate {
   clear: () => void;
@@ -8,14 +8,14 @@ export interface LogUpdate {
   (str: string): void;
 }
 
-const create = (stream: Writable, { showCursor = false } = {}): LogUpdate => {
+const create = (writer: Writer, { showCursor = false } = {}): LogUpdate => {
   let previousLineCount = 0;
   let previousOutput = "";
   let hasHiddenCursor = false;
 
   const render = (str: string) => {
     if (!showCursor && !hasHiddenCursor) {
-      cliCursor.hide();
+      cliCursor.hide(writer);
       hasHiddenCursor = true;
     }
 
@@ -25,12 +25,12 @@ const create = (stream: Writable, { showCursor = false } = {}): LogUpdate => {
     }
 
     previousOutput = output;
-    stream.write(ansiEscapes.eraseLines(previousLineCount) + output);
+    writer.write(ansiEscapes.eraseLines(previousLineCount) + output);
     previousLineCount = output.split("\n").length;
   };
 
   render.clear = () => {
-    stream.write(ansiEscapes.eraseLines(previousLineCount));
+    writer.write(ansiEscapes.eraseLines(previousLineCount));
     previousOutput = "";
     previousLineCount = 0;
   };
@@ -40,7 +40,7 @@ const create = (stream: Writable, { showCursor = false } = {}): LogUpdate => {
     previousLineCount = 0;
 
     if (!showCursor) {
-      cliCursor.show();
+      cliCursor.show(writer);
       hasHiddenCursor = false;
     }
   };

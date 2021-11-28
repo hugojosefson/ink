@@ -113,6 +113,7 @@ interface Options {
  * ```
  */
 const useInput = (inputHandler: Handler, options: Options = {}) => {
+  // deno-lint-ignore camelcase
   const { stdin, setRawMode, internal_exitOnCtrlC } = useStdin();
 
   useEffect(() => {

@@ -1,8 +1,7 @@
 import { ReactElement } from "../deps.ts";
 import Ink, { Options as InkOptions } from "./ink.tsx";
 import instances from "./instances.ts";
-import { Stream } from "../deps.ts";
-import { NodeJS } from "../deps.ts";
+import { StdErr, StdIn, StdOut } from "./stdio.ts";
 
 export interface RenderOptions {
   /**
@@ -10,18 +9,18 @@ export interface RenderOptions {
    *
    * @default process.stdout
    */
-  stdout?: NodeJS.WriteStream;
+  stdout?: StdOut;
   /**
    * Input stream where app will listen for input.
    *
    * @default process.stdin
    */
-  stdin?: NodeJS.ReadStream;
+  stdin?: StdIn;
   /**
    * Error stream.
    * @default process.stderr
    */
-  stderr?: NodeJS.WriteStream;
+  stderr?: StdErr;
   /**
    * If true, each update will be rendered as a separate output, without replacing the previous one.
    *
@@ -64,7 +63,7 @@ export interface Instance {
   clear: () => void;
 }
 
-type RenderFunction = <Props, K extends NodeJS.WriteStream | RenderOptions>(
+type RenderFunction = <Props, K extends StdOut | RenderOptions>(
   tree: ReactElement<Props>,
   options?: K,
 ) => Instance;
@@ -74,9 +73,9 @@ type RenderFunction = <Props, K extends NodeJS.WriteStream | RenderOptions>(
  */
 const render: RenderFunction = (node, options): Instance => {
   const inkOptions: InkOptions = {
-    stdout: process.stdout,
-    stdin: process.stdin,
-    stderr: process.stderr,
+    stdout: new StdOut(),
+    stdin: new StdIn(),
+    stderr: new StdErr(),
     debug: false,
     exitOnCtrlC: true,
     patchConsole: true,
@@ -102,12 +101,12 @@ const render: RenderFunction = (node, options): Instance => {
 export default render;
 
 const getOptions = (
-  stdout: NodeJS.WriteStream | RenderOptions | undefined = {},
+  stdout: StdOut | RenderOptions | undefined = {},
 ): RenderOptions => {
-  if (stdout instanceof Stream) {
+  if (stdout instanceof StdOut) {
     return {
       stdout,
-      stdin: process.stdin,
+      stdin: new StdIn(),
     };
   }
 
@@ -115,7 +114,7 @@ const getOptions = (
 };
 
 const getInstance = (
-  stdout: NodeJS.WriteStream,
+  stdout: StdOut,
   createInstance: () => Ink,
 ): Ink => {
   let instance: Ink;

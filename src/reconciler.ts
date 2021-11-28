@@ -1,4 +1,5 @@
 import {
+  env,
   unstable_cancelCallback as cancelPassiveEffects,
   unstable_scheduleCallback as schedulePassiveEffects,
 } from "../deps.ts";
@@ -24,9 +25,9 @@ import { OutputTransformer } from "./render-node-to-output.ts";
 // We need to conditionally perform devtools connection to avoid
 // accidentally breaking other third-party code.
 // See https://github.com/vadimdemedes/ink/issues/384
-if (process.env.DEV === "true") {
+if (env.DEV === "true") {
   // eslint-disable-next-line import/no-unassigned-import
-  require("./devtools");
+  await import("./devtools.ts");
 }
 
 const cleanupYogaNode = (node?: Yoga.YogaNode): void => {
@@ -57,6 +58,7 @@ export default createReconciler<
   unknown,
   unknown
 >({
+  // deno-lint-ignore ban-ts-comment
   // @ts-ignore
   schedulePassiveEffects,
   cancelPassiveEffects,
@@ -197,7 +199,9 @@ export default createReconciler<
                 updatePayload.style = style;
               }
 
+              // deno-lint-ignore no-explicit-any
               (updatePayload.style as any).borderStyle = newStyle.borderStyle;
+              // deno-lint-ignore no-explicit-any
               (updatePayload.style as any).borderColor = newStyle.borderColor;
             }
 
@@ -208,6 +212,7 @@ export default createReconciler<
                 updatePayload.style = style;
               }
 
+              // deno-lint-ignore no-explicit-any
               (updatePayload.style as any)[styleKey] = newStyle[styleKey];
             }
           }
@@ -215,6 +220,7 @@ export default createReconciler<
           continue;
         }
 
+        // deno-lint-ignore no-explicit-any
         (updatePayload as any)[key] = newProps[key];
       }
     }

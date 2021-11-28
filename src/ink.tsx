@@ -1,5 +1,5 @@
 import { React, ReactNode } from "../deps.ts";
-import { DebouncedFunc, throttle } from "../deps.ts";
+import { throttle } from "../deps.ts";
 import logUpdate, { LogUpdate } from "./log-update.ts";
 import { ansiEscapes } from "../deps.ts";
 import { autoBind } from "../deps.ts";
@@ -12,15 +12,16 @@ import * as dom from "./dom.ts";
 import { FiberRoot } from "../deps.ts";
 import instances from "./instances.ts";
 import App from "./components/App.tsx";
-import { NodeJS } from "../deps.ts";
+import { env } from "../deps.ts";
+import { StdErr, StdIn, StdOut } from "./stdio.ts";
 
-const isCI = process.env.CI === "false" ? false : originalIsCI;
+const isCI = env.CI === "false" ? false : originalIsCI;
 const noop = () => {};
 
 export interface Options {
-  stdout: NodeJS.WriteStream;
-  stdin: NodeJS.ReadStream;
-  stderr: NodeJS.WriteStream;
+  stdout: StdOut;
+  stdin: StdIn;
+  stderr: StdErr;
   debug: boolean;
   exitOnCtrlC: boolean;
   patchConsole: boolean;
@@ -30,7 +31,7 @@ export interface Options {
 export default class Ink {
   private readonly options: Options;
   private readonly log: LogUpdate;
-  private readonly throttledLog: LogUpdate | DebouncedFunc<LogUpdate>;
+  private readonly throttledLog: LogUpdate;
   // Ignore last render after unmounting a tree to prevent empty output before exit
   private isUnmounted: boolean;
   private lastOutput: string;
@@ -63,7 +64,7 @@ export default class Ink {
       : throttle(this.log, undefined, {
         leading: true,
         trailing: true,
-      });
+      }) as unknown as LogUpdate;
 
     // Ignore last render after unmounting a tree to prevent empty output before exit
     this.isUnmounted = false;
@@ -86,7 +87,7 @@ export default class Ink {
     // Unmount when process exits
     this.unsubscribeExit = signalExit(this.unmount, { alwaysLast: false });
 
-    if (process.env.DEV === "true") {
+    if (env.DEV === "true") {
       reconciler.injectIntoDevTools({
         bundleType: 0,
         // Reporting React DOM's version, not Ink's
@@ -101,10 +102,10 @@ export default class Ink {
     }
 
     if (!isCI) {
-      options.stdout.on("resize", this.onRender);
+      Deno.addSignalListener("SIGWINCH", this.onRender);
 
       this.unsubscribeResize = () => {
-        options.stdout.off("resize", this.onRender);
+        Deno.removeSignalListener("SIGWINCH", this.onRender);
       };
     }
   }

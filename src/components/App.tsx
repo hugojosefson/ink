@@ -7,7 +7,7 @@ import StdoutContext from "./StdoutContext.ts";
 import StderrContext from "./StderrContext.ts";
 import FocusContext from "./FocusContext.ts";
 import ErrorOverview from "./ErrorOverview.tsx";
-import { NodeJS } from "../../deps.ts";
+import { StdErr, StdIn, StdOut } from "../stdio.ts";
 
 const TAB = "\t";
 const SHIFT_TAB = "\u001B[Z";
@@ -15,9 +15,9 @@ const ESC = "\u001B";
 
 interface Props {
   readonly children: ReactNode;
-  readonly stdin: NodeJS.ReadStream;
-  readonly stdout: NodeJS.WriteStream;
-  readonly stderr: NodeJS.WriteStream;
+  readonly stdin: StdIn;
+  readonly stdout: StdOut;
+  readonly stderr: StdErr;
   readonly writeToStdout: (data: string) => void;
   readonly writeToStderr: (data: string) => void;
   readonly exitOnCtrlC: boolean;
@@ -137,9 +137,9 @@ export default class App extends PureComponent<Props, State> {
     const { stdin } = this.props;
 
     if (!this.isRawModeSupported()) {
-      if (stdin === process.stdin) {
+      if (stdin.isDefault) {
         throw new Error(
-          "Raw mode is not supported on the current process.stdin, which Ink uses as input stream by default.\nRead about how to prevent this error on https://github.com/vadimdemedes/ink/#israwmodesupported",
+          "Raw mode is not supported on the current Deno.stdin, which Ink uses as input stream by default.\nRead about how to prevent this error on https://github.com/vadimdemedes/ink/#israwmodesupported",
         );
       } else {
         throw new Error(
