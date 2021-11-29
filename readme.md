@@ -18,7 +18,7 @@ Deno.
 - [ ] ????
 - [ ] Hopefully, get some basic `ink` functionality running with Deno.
 
-### 2. Contribute
+### 2. Contribute upstream
 
 - [ ] Evaluate if/how relevant parts of the PoC can be implemented properly
       upstream.
