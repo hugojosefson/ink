@@ -113,6 +113,7 @@ interface Options {
  * ```
  */
 const useInput = (inputHandler: Handler, options: Options = {}) => {
+  // deno-lint-ignore camelcase
   const { stdin, setRawMode, internal_exitOnCtrlC } = useStdin();
 
   useEffect(() => {
@@ -132,9 +133,7 @@ const useInput = (inputHandler: Handler, options: Options = {}) => {
       return;
     }
 
-    const handleData = (data: Buffer) => {
-      let input = String(data);
-
+    const handleData = (input: string) => {
       const key = {
         upArrow: input === "\u001B[A",
         downArrow: input === "\u001B[B",

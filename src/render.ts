@@ -1,8 +1,11 @@
 import { ReactElement } from "../deps.ts";
 import Ink, { Options as InkOptions } from "./ink.tsx";
 import instances from "./instances.ts";
-import { Stream } from "../deps.ts";
-import { NodeJS } from "../deps.ts";
+import { getDefaultStdOut, StdOut } from "./io/stdout.ts";
+import { getDefaultStdIn, StdIn } from "./io/stdin.ts";
+import { getDefaultStdErr, StdErr } from "./io/stderr.ts";
+import { NodeStdOut } from "./io/node-stdout.ts";
+import { DenoStdOut } from "./io/deno-stdout.ts";
 
 export interface RenderOptions {
   /**
@@ -10,18 +13,18 @@ export interface RenderOptions {
    *
    * @default process.stdout
    */
-  stdout?: NodeJS.WriteStream;
+  stdout?: StdOut;
   /**
    * Input stream where app will listen for input.
    *
    * @default process.stdin
    */
-  stdin?: NodeJS.ReadStream;
+  stdin?: StdIn;
   /**
    * Error stream.
    * @default process.stderr
    */
-  stderr?: NodeJS.WriteStream;
+  stderr?: StdErr;
   /**
    * If true, each update will be rendered as a separate output, without replacing the previous one.
    *
@@ -64,7 +67,7 @@ export interface Instance {
   clear: () => void;
 }
 
-type RenderFunction = <Props, K extends NodeJS.WriteStream | RenderOptions>(
+type RenderFunction = <Props, K extends StdOut | RenderOptions>(
   tree: ReactElement<Props>,
   options?: K,
 ) => Instance;
@@ -74,9 +77,9 @@ type RenderFunction = <Props, K extends NodeJS.WriteStream | RenderOptions>(
  */
 const render: RenderFunction = (node, options): Instance => {
   const inkOptions: InkOptions = {
-    stdout: process.stdout,
-    stdin: process.stdin,
-    stderr: process.stderr,
+    stdout: getDefaultStdOut(),
+    stdin: getDefaultStdIn(),
+    stderr: getDefaultStdErr(),
     debug: false,
     exitOnCtrlC: true,
     patchConsole: true,
@@ -101,21 +104,26 @@ const render: RenderFunction = (node, options): Instance => {
 
 export default render;
 
+function isStdOut(possiblyStdOut: unknown): possiblyStdOut is StdOut {
+  return possiblyStdOut instanceof NodeStdOut ||
+    possiblyStdOut instanceof DenoStdOut;
+}
+
 const getOptions = (
-  stdout: NodeJS.WriteStream | RenderOptions | undefined = {},
+  stdOutOrOptions: StdOut | RenderOptions | undefined = {},
 ): RenderOptions => {
-  if (stdout instanceof Stream) {
+  if (isStdOut(stdOutOrOptions)) {
     return {
-      stdout,
-      stdin: process.stdin,
+      stdout: stdOutOrOptions,
+      stdin: getDefaultStdIn(),
     };
   }
 
-  return stdout;
+  return stdOutOrOptions;
 };
 
 const getInstance = (
-  stdout: NodeJS.WriteStream,
+  stdout: StdOut,
   createInstance: () => Ink,
 ): Ink => {
   let instance: Ink;

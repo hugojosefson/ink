@@ -10,6 +10,23 @@ declare global {
       "ink-text": Ink.Text;
     }
   }
+  // namespace process {
+  //   export const stdin: unknown;
+  //   export const stdout: unknown;
+  //   export const stderr: unknown;
+  // }
+  // namespace stream {
+  //   export interface Readable {
+  //     get isTTY(): boolean;
+  //     setRawMode(value: boolean): void;
+  //   }
+  //   export interface Writable {
+  //     get isTTY(): boolean;
+  //     write(string: string): void;
+  //     get columns(): number;
+  //     get rows(): number;
+  //   }
+  // }
 }
 
 declare namespace Ink {

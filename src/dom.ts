@@ -7,7 +7,8 @@ import { OutputTransformer } from "./render-node-to-output.ts";
 
 interface InkNode {
   parentNode: DOMElement | null;
-  yogaNode?: Yoga.YogaNode;
+  yogaNode?: YogaNode;
+  // deno-lint-ignore camelcase
   internal_static?: boolean;
   style: Styles;
 }
@@ -32,6 +33,7 @@ export type DOMElement = {
 
   // Internal properties
   isStaticDirty?: boolean;
+  // deno-lint-ignore no-explicit-any
   staticNode?: any;
   onRender?: () => void;
   onImmediateRender?: () => void;

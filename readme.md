@@ -11,11 +11,11 @@ work with Deno.
 
 - [x] Strip `ink` of everything but the code.
 - [x] `deno fmt`
-- […] Make the syntax pass `./check-syntax`.
-  - [ ] If necessary, fork dependencies and make them work with Deno.
-  - [ ] If necessary, remove dependencies that are not needed if they cause any
+- [x] Make the syntax pass `./check-syntax`.
+  - [x] If necessary, fork dependencies and make them work with Deno.
+  - [x] If necessary, remove dependencies that are not needed if they cause any
         trouble.
-  - […] Replace `process.stdin` etc with
+  - [?] Replace `process.stdin` etc with
     [Standard Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
 - [ ] ????
 - [ ] Hopefully, get some basic `ink` functionality running with Deno.

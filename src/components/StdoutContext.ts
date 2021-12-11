@@ -1,11 +1,11 @@
 import { createContext } from "../../deps.ts";
-import { NodeJS } from "../../deps.ts";
+import { StdOut } from "../io/stdout.ts";
 
 export interface Props {
   /**
    * Stdout stream passed to `render()` in `options.stdout` or `process.stdout` by default.
    */
-  readonly stdout?: NodeJS.WriteStream;
+  readonly stdout?: StdOut;
 
   /**
    * Write any string to stdout, while preserving Ink's output.
