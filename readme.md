@@ -17,6 +17,7 @@ work with Deno.
         trouble.
   - [?] Replace `process.stdin` etc with
     [Standard Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
+- [ ] Try using the library.
 - [ ] ????
 - [ ] Hopefully, get some basic `ink` functionality running with Deno.
 

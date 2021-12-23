@@ -1,13 +1,13 @@
-import { Yoga, YogaNode } from "../deps.ts";
 import measureText from "./measure-text.ts";
 import applyStyles, { Styles } from "./styles.ts";
 import wrapText from "./wrap-text.ts";
 import squashTextNodes from "./squash-text-nodes.ts";
 import { OutputTransformer } from "./render-node-to-output.ts";
+import { Yoga, yoga } from "../deps.ts";
 
 interface InkNode {
   parentNode: DOMElement | null;
-  yogaNode?: YogaNode;
+  yogaNode?: Yoga.YogaNode;
   // deno-lint-ignore camelcase
   internal_static?: boolean;
   style: Styles;
@@ -59,7 +59,7 @@ export const createNode = (nodeName: ElementNames): DOMElement => {
     attributes: {},
     childNodes: [],
     parentNode: null,
-    yogaNode: nodeName === "ink-virtual-text" ? undefined : Yoga.Node.create(),
+    yogaNode: nodeName === "ink-virtual-text" ? undefined : yoga.Node.create(),
   };
 
   if (nodeName === "ink-text") {
@@ -204,7 +204,7 @@ const measureTextNode = function (
   return measureText(wrappedText);
 };
 
-const findClosestYogaNode = (node?: DOMNode): YogaNode | undefined => {
+const findClosestYogaNode = (node?: DOMNode): Yoga.YogaNode | undefined => {
   if (!node || !node.parentNode) {
     return undefined;
   }

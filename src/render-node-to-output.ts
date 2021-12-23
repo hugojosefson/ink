@@ -1,4 +1,4 @@
-import { Yoga } from "../deps.ts";
+import "./global.d.ts";
 import { widestLine } from "../deps.ts";
 import { indentString } from "../deps.ts";
 import wrapText from "./wrap-text.ts";
@@ -7,6 +7,7 @@ import squashTextNodes from "./squash-text-nodes.ts";
 import renderBorder from "./render-border.ts";
 import { DOMElement } from "./dom.ts";
 import Output from "./output.ts";
+import { Yoga, yoga } from "../deps.ts";
 
 // If parent container is `<Box>`, text nodes will be treated as separate nodes in
 // the tree and will have their own coordinates in the layout.
@@ -53,7 +54,7 @@ const renderNodeToOutput = (
   const { yogaNode } = node;
 
   if (yogaNode) {
-    if (yogaNode.getDisplay() === Yoga.DISPLAY_NONE) {
+    if (yogaNode.getDisplay() === yoga.DISPLAY_NONE) {
       return;
     }
 

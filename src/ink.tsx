@@ -7,7 +7,7 @@ import { originalIsCI } from "../deps.ts";
 import reconciler from "./reconciler.ts";
 import render from "./renderer.ts";
 import { signalExit } from "../deps.ts";
-import { patchConsole } from "../deps.ts";
+import { patchConsole, Yoga, yoga } from "../deps.ts";
 import * as dom from "./dom.ts";
 import { FiberRoot } from "../deps.ts";
 import instances from "./instances.ts";
@@ -292,18 +292,6 @@ export default class Ink {
       return;
     }
 
-    this.restoreConsole = patchConsole((stream, data) => {
-      if (stream === "stdout") {
-        this.writeToStdout(data);
-      }
-
-      if (stream === "stderr") {
-        const isReactMessage = data.startsWith("The above error occurred");
-
-        if (!isReactMessage) {
-          this.writeToStderr(data);
-        }
-      }
-    });
+    this.restoreConsole = patchConsole();
   }
 }

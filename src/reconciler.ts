@@ -3,8 +3,8 @@ import {
   unstable_cancelCallback as cancelPassiveEffects,
   unstable_scheduleCallback as schedulePassiveEffects,
 } from "../deps.ts";
-import { createReconciler } from "../deps.ts";
-import { Yoga } from "../deps.ts";
+import { createReconciler, Yoga, yoga } from "../deps.ts";
+import "./global.d.ts";
 import {
   appendChildNode,
   createNode,
@@ -143,10 +143,10 @@ export default createReconciler<
   },
   getPublicInstance: (instance) => instance,
   hideInstance: (node) => {
-    node.yogaNode?.setDisplay(Yoga.DISPLAY_NONE);
+    node.yogaNode?.setDisplay(yoga.DISPLAY_NONE);
   },
   unhideInstance: (node) => {
-    node.yogaNode?.setDisplay(Yoga.DISPLAY_FLEX);
+    node.yogaNode?.setDisplay(yoga.DISPLAY_FLEX);
   },
   appendInitialChild: appendChildNode,
   appendChild: appendChildNode,

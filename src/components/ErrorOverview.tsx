@@ -1,37 +1,12 @@
 import { FC, React } from "../../deps.ts";
-import { existsSync, readFileSync } from "../../deps.ts";
-import { StackUtils } from "../../deps.ts";
-import { codeExcerpt, ExcerptLine } from "../../deps.ts";
-import { cwd } from "../../deps.ts";
 import Box from "./Box.tsx";
 import Text from "./Text.tsx";
-
-const stackUtils = new StackUtils({
-  cwd: cwd(),
-  internals: StackUtils.nodeInternals(),
-});
 
 interface Props {
   readonly error: Error;
 }
 
 const ErrorOverview: FC<Props> = ({ error }) => {
-  const stack = error.stack ? error.stack.split("\n").slice(1) : undefined;
-  const origin = stack ? stackUtils.parseLine(stack[0]) : undefined;
-  let excerpt: ExcerptLine[] | undefined;
-  let lineWidth = 0;
-
-  if (origin?.file && origin?.line && existsSync(origin.file)) {
-    const sourceCode = readFileSync(origin.file, "utf8");
-    excerpt = codeExcerpt(sourceCode, origin.line);
-
-    if (excerpt) {
-      for (const { line } of excerpt) {
-        lineWidth = Math.max(lineWidth, String(line).length);
-      }
-    }
-  }
-
   return (
     <Box flexDirection="column" padding={1}>
       <Box>
@@ -43,69 +18,17 @@ const ErrorOverview: FC<Props> = ({ error }) => {
         <Text>{error.message}</Text>
       </Box>
 
-      {origin && (
-        <Box marginTop={1}>
-          <Text dimColor>
-            {origin.file}:{origin.line}:{origin.column}
-          </Text>
-        </Box>
-      )}
-
-      {origin && excerpt && (
-        <Box marginTop={1} flexDirection="column">
-          {excerpt.map(({ line, value }) => (
-            <Box key={line}>
-              <Box width={lineWidth + 1}>
-                <Text
-                  dimColor={line !== origin.line}
-                  backgroundColor={line === origin.line ? "red" : undefined}
-                  color={line === origin.line ? "white" : undefined}
-                >
-                  {String(line).padStart(lineWidth, " ")}:
-                </Text>
-              </Box>
-
-              <Text
-                key={line}
-                backgroundColor={line === origin.line ? "red" : undefined}
-                color={line === origin.line ? "white" : undefined}
-              >
-                {" " + value}
-              </Text>
-            </Box>
-          ))}
-        </Box>
-      )}
-
       {error.stack && (
         <Box marginTop={1} flexDirection="column">
           {error.stack
             .split("\n")
             .slice(1)
             .map((line) => {
-              const parsedLine = stackUtils.parseLine(line);
-
-              // If the line from the stack cannot be parsed, we print out the unparsed line.
-              if (!parsedLine) {
-                return (
-                  <Box key={line}>
-                    <Text dimColor>-</Text>
-                    <Text dimColor bold>
-                      {line}
-                    </Text>
-                  </Box>
-                );
-              }
-
               return (
                 <Box key={line}>
                   <Text dimColor>-</Text>
                   <Text dimColor bold>
-                    {parsedLine.function}
-                  </Text>
-                  <Text dimColor color="gray">
-                    {" "}
-                    ({parsedLine.file}:{parsedLine.line}:{parsedLine.column})
+                    {line}
                   </Text>
                 </Box>
               );
