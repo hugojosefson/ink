@@ -1,6 +1,5 @@
 import "./src/global.d.ts";
 import { hide, show } from "./src/io/cli-cursor.ts";
-import { loadWasmModule } from "./src/load-wasm-module.ts";
 
 export { decode, encode } from "https://deno.land/std@0.87.0/encoding/utf8.ts";
 export {
@@ -29,8 +28,12 @@ export type {
   LiteralUnion,
 } from "https://cdn.skypack.dev/type-fest?dts";
 export type { Boxes } from "https://cdn.skypack.dev/cli-boxes@^2.2.0?dts";
-export { default as chalk } from "https://cdn.skypack.dev/chalk@^4.1.0?dts";
-export type { ForegroundColor } from "https://cdn.skypack.dev/chalk@^4.1.0?dts";
+
+import { default as chalkDefault } from "https://cdn.skypack.dev/chalk@^4.1.0?dts";
+const chalk = new chalkDefault.Instance({ level: 3 }); // https://github.com/chalk/chalk/tree/v4.1.2#chalklevel
+export { chalk };
+export { type ForegroundColor } from "https://cdn.skypack.dev/chalk@^4.1.0?dts";
+
 export { default as widestLine } from "https://cdn.skypack.dev/widest-line@^3.1.0?dts";
 export { default as indentString } from "https://cdn.skypack.dev/indent-string?dts";
 export { default as sliceAnsi } from "https://cdn.skypack.dev/slice-ansi@^3.0.0?dts";

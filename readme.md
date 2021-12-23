@@ -2,6 +2,9 @@
 
 An attempt at making ink work with [Deno](https://deno.land/).
 
+For now, you can run [example.tsx](example.tsx) using the script
+`./run-example`.
+
 ## TODO
 
 ### 1. Proof of concept
@@ -17,9 +20,10 @@ work with Deno.
         trouble.
   - [?] Replace `process.stdin` etc with
     [Standard Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
-- [ ] Try using the library.
-- [ ] ????
-- [ ] Hopefully, get some basic `ink` functionality running with Deno.
+- [?] ????
+- [x] Hopefully, get some basic `ink` functionality running with Deno.
+- [ ] Fix detection of color support level.
+- [ ] Try using this a little more, see where the limits are.
 
 ### 2. Contribute upstream
 

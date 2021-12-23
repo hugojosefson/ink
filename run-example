@@ -4,13 +4,9 @@ set -e
 
 clear
 
-#mkdir -p vendor/yoga-layout-wasm
-#cp ../yoga-layout-wasm/build/* vendor/yoga-layout-wasm/
-
 exec deno run \
   --unstable \
   --allow-env \
-  --allow-net=raw.githack.com,localhost:3000,deno.land \
-  --allow-read=.,../yoga-layout-wasm \
+  --no-check \
   ${@} \
   example.tsx
